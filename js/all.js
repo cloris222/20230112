@@ -65,3 +65,40 @@ const swiper = new Swiper('.swiper', {
 // gsap
 // 註冊plugin
 gsap.registerPlugin(ScrollToPlugin,ScrollTrigger,SplitText)
+
+// scrollTrigger 滾動軸
+
+  $('.main-link').each(function(i,e){
+    let idName = $(e).attr('href')
+    // 動畫對象為每個a連結
+    gsap.to(e,{
+      scrollTrigger:{
+        trigger:`${idName}`,/*觸發對象為有設置id的物件(例#section01-#section05)*/
+        start:'top center',
+        end:'bottom center',
+        // 為每個被觸發的a連結加上active的class
+        toggleClass:{
+          targets:e,
+          className:'active'
+        },
+        markers:true,
+      }
+    })
+  })
+
+
+
+// 視差效果
+// 星空背景
+gsap.to('body',{
+  scrollTrigger:{
+    trigger:'body',
+    scrub:3,
+    start:'top 0',
+    end:'bottom 0',
+    markers:true,
+    toggleActions: "play none none reverse",
+  },
+  backgroundPosition:'0% 100% ',
+  ease:'none'
+})

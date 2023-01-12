@@ -552,3 +552,8 @@ body {
     height: 400px;
   }
 }
+
+body {
+  overflow-x: hidden;
+  background: url(../../images/mask.png) no-repeat fixed 50% 0%/100% 100%, url(../../images/night_sky.jpg) no-repeat fixed 50% 0%;
+}
