@@ -1,0 +1,40 @@
+#footer{
+    color: #fff;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(0,0,0,0.5) 50%,
+        transparent 100%);
+
+        a{
+            color: #fff;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: 1s;
+            &:hover{
+                color: yellow;
+            }
+        }
+
+        .info{
+            padding: 2rem 1rem;
+
+            h5{
+                font-size: 1.3rem;
+                padding-bottom: 0.5rem;
+                margin-bottom: 1rem;
+                border-bottom:1px solid #fff ;
+                display: inline-block;
+            }
+
+            ul{
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                li + li{
+                    margin-left: 1rem
+                };
+            }
+            
+        }
+}
