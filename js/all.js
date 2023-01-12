@@ -1,3 +1,11 @@
+// modal出現時畫面會發生抖動
+$('#reg_btn,#login_btn').on('click',function(){
+  $('body,#navbar').css({
+    overflow:'auto',
+    'padding-right':0
+  })
+})
+
 // Section03 生物種族 -----------------------------------------------------
 $('#race a').on('click', function () {
   $('#race a').removeClass('active')
@@ -53,3 +61,7 @@ const swiper = new Swiper('.swiper', {
 
   
 });
+
+// gsap
+// 註冊plugin
+gsap.registerPlugin(ScrollToPlugin,ScrollTrigger,SplitText)
