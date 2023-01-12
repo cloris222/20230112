@@ -35,6 +35,71 @@
                     margin-left: 1rem
                 };
             }
+
+            .search{
+                margin-bottom: 1em;
+                form{
+                    position: relative;
+                    input{
+                        height: 40px;
+                        border-radius: 0;
+                        padding: 0;
+                    }
+                    button{
+                        font-size: 1.5rem;
+                        background: transparent;
+                        border: none;
+                        height: 100%;
+                        position: absolute;
+                        right: 0;
+                        top: 50%;
+                        transform: translateY(-50%);
+                    }
+                }
+            }
+
+            .social{
+                h5{
+                    margin-bottom: 0.3rem;
+                }
+                ul{
+                    a{
+                        font-size: 2rem;
+                    }
+                }
+            }
+
+            .site-map,.related-link,.about-us{
+                margin-top: 1rem;
+                ul{
+                    flex-direction: column;
+                    li{
+                        margin-left: 0;
+                        margin-bottom: 0.25rem;
+                    }
+                }
+            }
             
         }
+
+        .copyright{
+            padding-top: 1rem;
+            padding-bottom: 5rem;
+            letter-spacing: 0.15rem;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        @include lg{
+            .info{
+                .site-map,
+                .related-link,
+                .about-us{
+                    margin-top: 0;
+                }
+            }
+        }
+
+        
 }
