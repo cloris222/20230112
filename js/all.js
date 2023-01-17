@@ -229,6 +229,55 @@ float_tl
   })
   })
 
+  // splitText
+  gsap.set('#splitText',{
+    perspective:400,
+  })
+
+  const tl = gsap.timeline({
+    repeat:-1,
+    repeatDelay:8,
+  })
+
+  // 將段落轉成陣列
+  const paragraphs = gsap.utils.toArray('#splitText p')
+  const splitTexts = paragraphs.map(function(p){
+    return new SplitText(p,{
+      charsClass:'charBg'
+    })
+  })
+
+  splitTexts.forEach(splitText=>{
+    const chars = splitText.chars
+    tl.from(chars,{
+      y:80,
+      rotationX:0,
+      rotationY:180,
+      scale:2,
+      transformOrigin:'0% 50% -100',
+      opacity:0,
+      duration:2,
+      ease:'back',
+      stagger:0.1,
+      onComplete(){
+        gsap.to(chars,{
+          delay:3,
+          duration:2,
+          opacity:0,
+          y:80,
+          scale:2,
+          rotationX:180,
+          rotationY:0,
+          transformOrigin:'0% 50% -100',
+          ease:'back',
+          stagger:0.1,
+        })
+      }
+    },'+=3')
+     
+
+  })
+
   
   
 
