@@ -67,7 +67,21 @@ const swiper = new Swiper('.swiper', {
 gsap.registerPlugin(ScrollToPlugin,ScrollTrigger,SplitText)
 
 // scrollTrigger 滾動軸
+// backtop回頂端顯示隱藏
+gsap.to('.backtop',{
+  scrollTrigger:{
+    trigger:'#footer',
+    start:'top bottom',
+    end:'100% bottom',
+    toggleActions:'play none none reverse',
+    markers:true
+  },
+  display:'block',
+  opacity:1,
+  duration:1
+})
 
+// 導覽列active位置
   $('.main-link').each(function(i,e){
     let idName = $(e).attr('href')
     // 動畫對象為每個a連結
@@ -110,7 +124,7 @@ const float_tl = gsap.timeline({
     start:'top 100%',
     end:'bottom 100%',
     scrub:5,
-    markers:true
+    // markers:true
   },
   ease:'none'
 })
