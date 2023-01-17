@@ -81,7 +81,7 @@ gsap.registerPlugin(ScrollToPlugin,ScrollTrigger,SplitText)
           targets:e,
           className:'active'
         },
-        markers:true,
+        // markers:true,
       }
     })
   })
@@ -96,9 +96,82 @@ gsap.to('body',{
     scrub:3,
     start:'top 0',
     end:'bottom 0',
-    markers:true,
+    // markers:true,
     toggleActions: "play none none reverse",
   },
   backgroundPosition:'0% 100% ',
   ease:'none'
 })
+
+// 浮空的島
+const float_tl = gsap.timeline({
+  scrollTrigger:{
+    trigger:'body',
+    start:'top 100%',
+    end:'bottom 100%',
+    scrub:5,
+    markers:true
+  },
+  ease:'none'
+})
+
+float_tl
+  .from('.float-wrap-01',{
+    left:'-30%',
+  })
+  .from('.float-wrap-02',{
+    right:'-30%',
+  },'<')
+  .from('.float-wrap-03',{
+   bottom:'-100%',
+  },'<')
+
+  // 2.自身上下浮動的動畫
+  $('.float-island').each(function(i,e){
+    gsap.to(e,{
+      y:50 * (i+1),
+      duration:8 * (i+1),
+      repeat:-1,
+      yoyo:true,
+      ease:'power1.inOut'
+    })
+  })
+
+  // 霧
+  $('.fog').each(function(i,e){
+    console.log('e',e)
+    console.log('$(e)',$(e))
+
+    // gsap.set()設定duration為0的fog補間動畫,為他們設定css屬性
+    gsap.set(e,{
+      width:'100%',
+      height:'100%',
+      background:'url(../../../images/fog.png)no-repeat center/80%',
+      opacity:0.8,
+      position:'absolute',
+      top:'random(0,100)'+'%',
+
+      x:function(){
+        return i % 2 === 0? -$(window).width : $(window).width
+      }
+    })
+
+    // 做動畫
+  gsap.to(e,{
+    x:function(){
+      return i % 2 === 0? $(window).width : -$(window).width
+    },
+    repeat:-1,
+    duration:5,
+    ease:'none',
+    onRepeat(){
+      $(e).css({
+        top:gsap.utils.random(0,100)+'%'
+      })
+    }
+  })
+  })
+
+  
+  
+
