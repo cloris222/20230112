@@ -58,13 +58,56 @@ const swiper = new Swiper('.swiper', {
     nextEl: '.swiper-button-next',
     prevEl: '.swiper-button-prev',
   },
-
-  
 });
 
 // gsap
 // 註冊plugin
 gsap.registerPlugin(ScrollToPlugin,ScrollTrigger,SplitText)
+
+// ScrollToPlugin滑動效果
+$('#navbar .main-link, .backtop a').each(function(i,link){
+  $(this).on('click',function(e){
+    e.preventDefault();
+    if($(this).attr('href')==='#section04' ||$(this).attr('href')==='#section05'){
+      gsap.to($(window),{
+        scrollTo:{
+          y:`#section0${i+1}`
+        },
+        duration:1.5,
+        ease:'back.inOut'
+      })
+    }else{
+      gsap.to($(window),{
+        scrollTo:{
+          y:`#section0${i+1}`,
+          offsetY:150
+        },
+        duration:1.5,
+        ease:'back.inOut'
+      })
+    }
+    
+  })
+})
+
+// 導覽列滾動收合
+gsap.from('#navbar',{
+  yPercent:-100,
+  pause:false,
+  duration:0.5,
+  scrollTrigger:{
+    start:'top 60%',
+    end:()=>'+=' + document.documentElement.scrollHeight,/*end為整份文件高度*/ 
+    onEnter(self){
+      self.animation.play()
+    },
+    onUpdate(self){
+      // self.direction===-1  =>偵測到捲動軸往上
+      // self.direction===1  =>偵測到捲動軸往下
+      self.direction===-1? self.animation.play():self.animation.reverse()
+    },
+  }
+})
 
 // scrollTrigger 滾動軸
 // backtop回頂端顯示隱藏
