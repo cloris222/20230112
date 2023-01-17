@@ -143,6 +143,50 @@ gsap.to('.backtop',{
     })
   })
 
+  // 流星
+  // 1.創建流星數目
+  function createStar(starNumber){
+    for(let i = 0; i<starNumber;i++){
+      $('.shooting_star').append(`<div class="star"></div>`)
+    }
+    const stars = gsap.utils.toArray('.star')
+    return stars
+  }
+
+  // 2.設定流星補間動畫預設值
+  function setStarTween(stars){
+    gsap.set('.shooting_star',{
+      perspective:800
+    })
+    stars.forEach(function(star,index){
+      gsap.set(star,{
+        transformOrigin:'0 50%',
+        position:'absolute',
+        left:gsap.utils.random($(window).width()/2,$(window).width()*2),
+        top:gsap.utils.random(-100,-200),
+        rotation:-25
+      })
+    })
+  }
+  // 3.播放流星動畫
+  function playStarTimelines(stars){
+    const tl = gsap.timeline({
+      repeat:-1
+    })
+    tl.to(stars,{
+      x:`-=${$(window).width()*1.5}`,/*流星往左 */
+      y:`+=${$(window).height()*1.5}`,/*流星往下 */
+      z:`random(-100,500)`,
+      stagger:function(index,star,stars){
+        return gsap.utils.random(index+5 ,(index+5)*2,1)
+      },
+      duration:'random(0.5,3,0.1)',
+      ease:'none'
+    })
+  }
+  // 執行管道流程，按照設定的步驟去走流程
+  const playStar = gsap.utils.pipe(createStar,setStarTween,playStarTimelines)
+  playStar(30)
 
 
 // 視差效果
@@ -249,6 +293,7 @@ float_tl
 
   splitTexts.forEach(splitText=>{
     const chars = splitText.chars
+    console.log('chars',chars)
     tl.from(chars,{
       y:80,
       rotationX:0,
@@ -274,8 +319,6 @@ float_tl
         })
       }
     },'+=3')
-     
-
   })
 
   
